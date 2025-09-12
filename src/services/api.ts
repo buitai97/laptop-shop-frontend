@@ -8,9 +8,13 @@ const loginAPI = async (username: string, password: string) => {
 const getUserAPI = async (accessToken: string) => {
     const url = "http://localhost:5000/api/account"
     return await axios.get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
-    
-    
+
+
+}
+const getUsersAPI = async (accessToken: string) => {
+    const url = "http://localhost:5000/api/users"
+    return await axios.get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
 }
 
 
-export { loginAPI, getUserAPI }
+export { loginAPI, getUserAPI, getUsersAPI }

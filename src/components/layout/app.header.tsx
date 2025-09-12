@@ -2,15 +2,17 @@ import { useState } from 'react';
 import { HomeOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useAppContext } from '../../context/app.provider';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 
 const AppHeader = () => {
-    const { user } = useAppContext()
-    const items: MenuItem[] = [
+    const { user, setUser } = useAppContext()
+    const navigate = useNavigate()
+
+    let items: MenuItem[] = [
         {
             label: <Link to="/">Home</Link>,
             key: 'home',
@@ -28,10 +30,31 @@ const AppHeader = () => {
             children: [
                 { label: `Hello, ${user?.name ?? " "}`, key: 'greeting', disabled: true },
 
-                { label: 'Log Out', key: 'logout' },
+                {
+                    label: <span >Log Out</span>,
+                    key: 'logout',
+                    onClick: () => {
+                        localStorage.removeItem("accessToken")
+                        setUser({ id: 0, isAuthenticated: false, name: "", username: "" })
+                        navigate("/login")
+                    }
+                },
             ],
         },
     ];
+    if (!user?.isAuthenticated) {
+        items = [
+            {
+                label: <Link to="/">Home</Link>,
+                key: 'home',
+                icon: <HomeOutlined />,
+            },
+            {
+                label: <Link to="/login" > Login </Link >,
+                key: 'Login',
+            },
+        ];
+    }
 
 
     const [current, setCurrent] = useState('home');
