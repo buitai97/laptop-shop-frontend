@@ -3,13 +3,13 @@ import { createRoot } from 'react-dom/client'
 import Layout from './layout'
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
-import './styles/global.css'
-import User from './pages/admin/user';
-import Home from './pages/admin/home';
-import LoginPage from './pages/auth/login';
+import '@styles/global.scss'
+import User from '@pages/admin/user';
+import Home from '@pages/admin/home';
+import LoginPage from '@pages/auth/login';
 import { App } from 'antd';
 import '@ant-design/v5-patch-for-react-19';
-import AppProvider from './context/app.provider';
+import AppProvider from '@context/app.provider';
 
 const router = createBrowserRouter([
     {

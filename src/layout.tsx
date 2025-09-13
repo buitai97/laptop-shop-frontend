@@ -1,10 +1,10 @@
 import { Outlet } from "react-router"
-import AppHeader from "./components/layout/app.header"
+import AppHeader from "@components/admin/layout/layout/app.header"
 import { useEffect } from "react"
-import { useAppContext } from "./context/app.provider"
-import { getUserAPI } from "./services/api"
+import { useAppContext } from "@context/app.provider"
+import { getUserAPI } from "@services/api"
 import { Spin } from "antd"
-import AppFooter from "./components/layout/app.footer"
+import AppFooter from "@components/admin/layout/layout/app.footer"
 
 const Layout = () => {
     const { setUser, isPageLoading, setIsPageLoading } = useAppContext()

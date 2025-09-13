@@ -3,7 +3,7 @@ import { HomeOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { Link, useNavigate } from 'react-router';
-import { useAppContext } from '../../context/app.provider';
+import { useAppContext } from '@context/app.provider';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
