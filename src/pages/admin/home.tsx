@@ -1,7 +1,7 @@
-import { useAppContext } from "../../context/app.provider";
+import { useAppContext } from "@context/app.provider";
 
 const Home = () => {
-    const {} = useAppContext()
+    const { } = useAppContext()
     return (
         <div>
             Home Page
