@@ -9,7 +9,7 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 
 const AppHeader = () => {
-    const { user, setUser } = useAppContext()
+    const { user, setUser, isAuthenticated, setIsAuthenticated } = useAppContext()
     const navigate = useNavigate()
 
     let items: MenuItem[] = [
@@ -35,14 +35,15 @@ const AppHeader = () => {
                     key: 'logout',
                     onClick: () => {
                         localStorage.removeItem("accessToken")
-                        setUser({ id: 0, isAuthenticated: false, name: "", username: "" })
+                        setUser({ id: 0, name: "", username: "" })
+                        setIsAuthenticated(false)
                         navigate("/login")
                     }
                 },
             ],
         },
     ];
-    if (!user?.isAuthenticated) {
+    if (!isAuthenticated) {
         items = [
             {
                 label: <Link to="/">Home</Link>,

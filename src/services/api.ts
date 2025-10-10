@@ -3,9 +3,18 @@ import axios from "axios"
 
 const base = import.meta.env.VITE_API_BASE_URL;
 
+const registerAPI = async (name: string, username: string, email: string, password: string, confirmPassword: string) => {
+    const url = base + "/api/register"
+    return await axios.post(url, { name, username, email, password, confirmPassword })
+}
 const loginAPI = async (username: string, password: string) => {
     const url = base + "/api/login"
     return await axios.post(url, { username, password })
+}
+
+const logoutAPI = async () => {
+    const url = base + "/api/logout"
+    return await axios.post(url)
 }
 
 const getUserAPI = async (accessToken: string) => {
@@ -24,4 +33,4 @@ const getProductsAPI = async () => {
     return await axios.get(url)
 }
 
-export { loginAPI, getUserAPI, getUsersAPI, getProductsAPI }
+export { loginAPI, getUserAPI, getUsersAPI, getProductsAPI, registerAPI, logoutAPI }

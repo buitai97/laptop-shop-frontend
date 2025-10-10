@@ -5,17 +5,19 @@ interface IProps {
 }
 
 interface IUser {
-    isAuthenticated: boolean,
     id: number,
     username: string,
-    name: string
+    name: string,
 }
 
 interface IAppData {
-    user?: IUser,
-    setUser: (v: IUser) => void
+    isAuthenticated: boolean,
+    user?: IUser | null,
+    setUser: (v: IUser | null) => void,
     isPageLoading: boolean,
-    setIsPageLoading: (v: boolean) => void
+    setIsPageLoading: (v: boolean) => void,
+    setIsAuthenticated: (v: boolean) => void,
+
 };
 
 // The context is created with `| null` in the type, to accurately reflect the default value.
@@ -29,12 +31,12 @@ export const useAppContext = () => {
 }
 
 const AppProvider = (props: IProps) => {
-
-    const [user, setUser] = useState<IUser>({ isAuthenticated: false, id: 0, username: "", name: "" })
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+    const [user, setUser] = useState<IUser | null>(null)
     const [isPageLoading, setIsPageLoading] = useState<boolean>(false)
     const { children } = props
     return (
-        <AppContext value={{ user, setUser, isPageLoading, setIsPageLoading }}>
+        <AppContext value={{ user, setUser, isPageLoading, setIsPageLoading, isAuthenticated, setIsAuthenticated }}>
             {children}
         </AppContext>
     )

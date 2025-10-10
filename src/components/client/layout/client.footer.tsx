@@ -1,4 +1,4 @@
-import { GithubOutlined, TwitterOutlined, LinkedinOutlined } from "@ant-design/icons";
+import { GithubOutlined, TwitterOutlined, LinkedinOutlined, XOutlined } from "@ant-design/icons";
 
 export default function AppFooter() {
     return (
@@ -18,13 +18,13 @@ export default function AppFooter() {
 
                 {/* Socials */}
                 <div className="flex gap-4 text-xl">
-                    <a href="https://github.com" target="_blank" className=" w-10 h-10 flex items-center justify-center rounded-full  hover:bg-blue-500 hover:text-white transition">
+                    <a href="https://github.com" target="_blank" className=" w-10 h-10 flex items-center justify-center rounded-full">
                         <GithubOutlined />
                     </a>
-                    <a href="https://twitter.com" target="_blank" className=" w-10 h-10 flex items-center justify-center rounded-full  hover:bg-blue-500 hover:text-white transition">
-                        <TwitterOutlined />
+                    <a href="https://x.com" target="_blank" className=" w-10 h-10 flex items-center justify-center rounded-full">
+                        <XOutlined />
                     </a>
-                    <a href="https://linkedin.com" target="_blank" className="w-10 h-10 flex items-center justify-center rounded-full  hover:bg-blue-500! hover:text-white transition">
+                    <a href="https://linkedin.com" target="_blank" className="w-10 h-10 flex items-center justify-center rounded-full">
                         <LinkedinOutlined />
                     </a>
                 </div>

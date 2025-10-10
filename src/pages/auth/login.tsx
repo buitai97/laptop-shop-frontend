@@ -1,7 +1,7 @@
 import type { FormProps } from 'antd';
-import { App, Button, Form, Input } from 'antd';
+import { App, Button, Divider, Form, Input, Typography } from 'antd';
 import { loginAPI } from '../../services/api';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 type FieldType = {
     username: string;
@@ -21,7 +21,7 @@ const LoginPage = () => {
             if (res?.data) {
                 const accessToken = res.data.accessToken
                 localStorage.setItem("accessToken", accessToken)
-
+                
                 navigate("/")
             }
         }
@@ -39,7 +39,7 @@ const LoginPage = () => {
         console.log('Failed:', errorInfo);
     };
     return (
-        <div style={{ maxWidth: "600px", margin: "auto", padding: "60px" }}>
+        <div style={{ maxWidth: "500px", margin: "auto", padding: "60px" }}>
             <Form
                 name="basic"
                 initialValues={{ remember: true }}
@@ -47,11 +47,16 @@ const LoginPage = () => {
                 layout='vertical'
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
+                className='form-container p-5!'
             >
+                <Typography.Title level={2} style={{ textAlign: 'center' }}>
+                    Login
+                </Typography.Title>
+                <Divider />
                 <Form.Item<FieldType>
                     label="Username"
                     name="username"
-                    rules={[{ required: true, message: 'Please input your username!' }]}
+                    rules={[{ required: true, message: 'Please enter your username!' }]}
                 >
                     <Input />
                 </Form.Item>
@@ -59,16 +64,19 @@ const LoginPage = () => {
                 <Form.Item<FieldType>
                     label="Password"
                     name="password"
-                    rules={[{ required: true, message: 'Please input your password!' }]}
+                    rules={[{ required: true, message: 'Please enter your password!' }]}
                 >
                     <Input.Password />
                 </Form.Item>
 
-                <Form.Item label={null}>
+                <Form.Item className='text-center'>
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        Login
                     </Button>
                 </Form.Item>
+                <Divider>OR</Divider>
+                <div style={{ textAlign: "center" }}><Link to="/register">Create new account</Link></div>
+
             </Form>
         </div>
 

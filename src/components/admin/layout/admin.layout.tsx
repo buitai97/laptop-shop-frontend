@@ -7,7 +7,7 @@ import { Spin } from "antd"
 import AdminFooter from "@/components/admin/layout/admin.footer"
 
 const Layout = () => {
-    const { setUser, isPageLoading, setIsPageLoading } = useAppContext()
+    const { setUser, isPageLoading, setIsPageLoading, setIsAuthenticated } = useAppContext()
     useEffect(() => {
         const initUser = async () => {
             setIsPageLoading(true)
@@ -16,7 +16,8 @@ const Layout = () => {
                 const res = await getUserAPI(accessToken)
                 const user = res?.data?.data?.user
                 if (user) {
-                    setUser({ isAuthenticated: true, id: user.id, username: user.username, name: user.name })
+                    setUser({ id: user.id, username: user.username, name: user.name })
+                    setIsAuthenticated(true)
                 }
             }
             setIsPageLoading(false)

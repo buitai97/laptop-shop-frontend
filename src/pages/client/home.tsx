@@ -1,11 +1,11 @@
-import { Carousel, Col, Row, Tabs, type TabsProps, } from "antd";
-import { useAppContext } from "@context/app.provider";
+import { Carousel, Col, Row } from "antd";
 import { Typography } from "antd";
 import banner1 from "@/assets/hero-img-1.jpg";
 import banner2 from "@/assets/hero-img-2.jpg";
 import heroImg from "@/assets/hero-img.jpg"
 import { useMediaQuery } from "react-responsive";
 import Products from "@/components/client/home/products";
+import { useAppContext } from "@/context/app.provider";
 
 const images = [
     banner1,
@@ -13,29 +13,9 @@ const images = [
 ];
 
 const ClientHomePage = () => {
-    const { } = useAppContext()
-    const productTabs: TabsProps['items'] = [
-        {
-            key: '1',
-            label: 'All',
-            children: <Products />
-        },
-
-        {
-            key: '2',
-            label: 'Laptops',
-            children: 'Content of Tab Pane 2',
-        },
-        {
-            key: '3',
-            label: 'Accessories',
-            children: 'Content of Tab Pane 3',
-        },
-
-
-
-    ];
     const isSmallScreen = useMediaQuery({ maxWidth: 768 });
+    const { user } = useAppContext()
+    console.log(user)
     return (
         <div>
             <div style={{
@@ -74,16 +54,9 @@ const ClientHomePage = () => {
 
 
             </div>
-            <Row className="p-10">
-
-                <Col className="" span={24}>
-                    <Tabs
-                        items={productTabs}
-
-                        defaultActiveKey="1"
-                    />
-                </Col>
-            </Row>
+            <div className="px-10 pt-10">
+                <Products />
+            </div>
         </div>
 
     )

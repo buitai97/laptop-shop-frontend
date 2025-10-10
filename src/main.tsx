@@ -13,6 +13,7 @@ import AppProvider from '@context/app.provider';
 import ClientLayout from './components/client/layout/client.layout';
 import '@styles/global.scss'
 import "@styles/tailwind.css";
+import RegisterPage from './pages/auth/register';
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <LoginPage />
+    },
+    {
+        path: "/register",
+        element: <RegisterPage />
     }
 ]);
 
