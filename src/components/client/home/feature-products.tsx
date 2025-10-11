@@ -18,23 +18,7 @@ interface IProduct {
 
 const { Title, Text, Paragraph } = Typography;
 
-const ProductCards = () => {
-    //     const products = [
-    //     {
-    //       id: 1,
-    //       title: "Premium Wireless Headphones",
-    //       category: "Electronics",
-    //       description: "Experience crystal-clear audio with our latest noise-cancelling wireless headphones featuring 30-hour battery life.",
-    //       price: 199,
-    //       originalPrice: 249,
-    //       rating: 4.8,
-    //       reviews: 124,
-    //       image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop",
-    //       badge: { text: "New", color: "red" },
-    //       inStock: true
-    //     },
-    //     
-    //   ];
+const FeatureProducts = () => {
     const [products, setProducts] = useState<IProduct[]>();
 
     useEffect(() => {
@@ -168,4 +152,4 @@ const ProductCards = () => {
     );
 };
 
-export default ProductCards;
+export default FeatureProducts;

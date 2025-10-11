@@ -14,6 +14,7 @@ import ClientLayout from './components/client/layout/client.layout';
 import '@styles/global.scss'
 import "@styles/tailwind.css";
 import RegisterPage from './pages/auth/register';
+import ProductsPage from './pages/client/products';
 
 const router = createBrowserRouter([
     {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "products",
-                element: "Product Page"
+                element: <ProductsPage />
             }
         ]
     },

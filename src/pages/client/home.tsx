@@ -4,8 +4,8 @@ import banner1 from "@/assets/hero-img-1.jpg";
 import banner2 from "@/assets/hero-img-2.jpg";
 import heroImg from "@/assets/hero-img.jpg"
 import { useMediaQuery } from "react-responsive";
-import Products from "@/components/client/home/products";
 import { useAppContext } from "@/context/app.provider";
+import FeatureProducts from "@/components/client/home/feature-products";
 
 const images = [
     banner1,
@@ -54,8 +54,8 @@ const ClientHomePage = () => {
 
 
             </div>
-            <div className="px-10 pt-10">
-                <Products />
+            <div className="px-10 py-10">
+                <FeatureProducts />
             </div>
         </div>
 

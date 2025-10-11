@@ -18,11 +18,6 @@ const ClientHeader = () => {
 
     const items: MenuProps['items'] = [
         {
-            label: <span>Hi, {user?.name}</span>,
-            key: '0',
-
-        },
-        {
             label: (
                 <a href="/" rel="noopener noreferrer">
                     Home
@@ -53,7 +48,7 @@ const ClientHeader = () => {
     return (
         <Header className="flex !items-center !justify-between !bg-white shadow">
 
-            <div className="text-xl font-bold text-cyan-900">Tech Store</div>
+            <div className="text-xl font-bold text-cyan-900 cursor-pointer" onClick={() => { navigate("/") }}>Tech Store</div>
             <div className="">
                 <div>
                     <Link to="/" className="text-gray-500!">Home</Link>
@@ -63,19 +58,16 @@ const ClientHeader = () => {
 
 
             {user ? (
-                <div
-                    className="md:hidden"
-                    style={{ cursor: "pointer" }}
+
+                <Dropdown
+                    menu={{ items }}
+                    trigger={['click']}
+                    className="cursor-pointer"
                 >
-                    <Dropdown
-                        menu={{ items }}
-                        trigger={['click']}
-                    >
-                        <Space>
-                            <MenuOutlined />
-                        </Space>
-                    </Dropdown>
-                </div>
+                    <Space>
+                        <MenuOutlined />
+                    </Space>
+                </Dropdown>
             ) :
                 <Link to="/login">Login</Link>
             }

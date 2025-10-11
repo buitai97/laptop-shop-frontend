@@ -1,8 +1,8 @@
-import { GithubOutlined, TwitterOutlined, LinkedinOutlined, XOutlined } from "@ant-design/icons";
+import { GithubOutlined, LinkedinOutlined, XOutlined } from "@ant-design/icons";
 
 export default function AppFooter() {
     return (
-        <footer style={{ background: "#45595b" }} className="text-gray-300 py-6 mt-12">
+        <footer style={{ background: "#45595b" }} className="text-gray-300 py-6">
             <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
                 {/* Brand */}
                 <div className="text-lg font-semibold text-white">
