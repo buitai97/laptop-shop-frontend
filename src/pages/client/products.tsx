@@ -2,19 +2,9 @@ import { useEffect, useState } from 'react';
 import { Card, Row, Col, Button, Badge, Typography, Tag, message, Slider, Divider, Checkbox, Input, Pagination } from 'antd';
 import { SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { getProductsAPI } from '@/services/api';
+import { useNavigate } from 'react-router';
 
-interface IProduct {
-    detailDesc: string,
-    factory: string,
-    id: number,
-    image: string,
-    name: string,
-    price: number,
-    quantity: number,
-    shortDesc: string,
-    sold?: number,
-    target: null
-}
+
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -22,7 +12,7 @@ const { Title, Text, Paragraph } = Typography;
 const ProductsPage = () => {
     const [products, setProducts] = useState<IProduct[]>();
     const [loading, setLoading] = useState<any>({});
-
+    const navigate = useNavigate()
     // filter states
     const [selectedFactories, setSelectedFactories] = useState<string[]>([]);
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000]);
@@ -32,13 +22,15 @@ const ProductsPage = () => {
     const factories = Array.from(new Set(products?.map(p => p.factory)));
     useEffect(() => {
         const fetchProducts = async () => {
-            const res = await getProductsAPI()
+            const res = await getProductsAPI(1, 10)
+            console.log(res)
             const products = res.data.products
             setProducts(products)
         }
         fetchProducts()
 
     }, [])
+
 
     const handleFactoryChange = (checkedValues: any) => {
         setSelectedFactories(checkedValues);
@@ -174,7 +166,10 @@ const ProductsPage = () => {
                                     <Card
                                         hoverable
                                         cover={
-                                            <div className="h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group">
+                                            <div
+                                                className="h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group"
+                                                onClick={() => { navigate(`/products/${product.id}`) }}
+                                            >
                                                 <img
                                                     alt={product.name}
                                                     src={`${import.meta.env.VITE_API_BASE_URL}/images/product/${product.image}`}
@@ -199,6 +194,7 @@ const ProductsPage = () => {
                                                 level={4}
                                                 className="mb-3 text-gray-800 leading-tight hover:text-blue-600! text-center transition-colors duration-300"
                                                 ellipsis={{ rows: 1 }}
+                                                onClick={() => { navigate(`/products/${product.id}`) }}
                                             >
                                                 {product.name}
                                             </Title>

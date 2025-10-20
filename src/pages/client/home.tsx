@@ -4,7 +4,6 @@ import banner1 from "@/assets/hero-img-1.jpg";
 import banner2 from "@/assets/hero-img-2.jpg";
 import heroImg from "@/assets/hero-img.jpg"
 import { useMediaQuery } from "react-responsive";
-import { useAppContext } from "@/context/app.provider";
 import FeatureProducts from "@/components/client/home/feature-products";
 
 const images = [
@@ -14,8 +13,6 @@ const images = [
 
 const ClientHomePage = () => {
     const isSmallScreen = useMediaQuery({ maxWidth: 768 });
-    const { user } = useAppContext()
-    console.log(user)
     return (
         <div>
             <div style={{

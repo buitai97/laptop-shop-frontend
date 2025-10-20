@@ -28,9 +28,17 @@ const getUsersAPI = async (accessToken: string) => {
     return await axios.get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
 }
 
-const getProductsAPI = async () => {
-    const url = base + "/api/products"
+const getProductsAPI = async (page: number, size: number) => {
+    let url = base + "/api/products"
+    return await axios.get(url, {
+        params: { page, size }
+    })
+}
+
+const getProductAPI = async (id: number) => {
+    let url = base + `/api/products/${id}`
+
     return await axios.get(url)
 }
 
-export { loginAPI, getUserAPI, getUsersAPI, getProductsAPI, registerAPI, logoutAPI }
+export { loginAPI, getProductAPI, getUserAPI, getUsersAPI, getProductsAPI, registerAPI, logoutAPI }

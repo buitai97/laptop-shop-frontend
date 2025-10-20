@@ -23,10 +23,9 @@ const FeatureProducts = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const res = await getProductsAPI()
+            const res = await getProductsAPI(1, 5)
             const products = res.data.products
             setProducts(products)
-            console.log(products)
         }
         fetchProducts()
 

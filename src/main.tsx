@@ -15,6 +15,7 @@ import '@styles/global.scss'
 import "@styles/tailwind.css";
 import RegisterPage from './pages/auth/register';
 import ProductsPage from './pages/client/products';
+import ProductDetailPage from './pages/client/productDetail';
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: "products",
                 element: <ProductsPage />
+            },
+            {
+                path: "products/:id",
+                element: <ProductDetailPage />
             }
         ]
     },
