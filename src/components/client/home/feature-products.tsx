@@ -3,19 +3,6 @@ import { Card, Row, Col, Button, Badge, Typography, Tag, message } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { getProductsAPI } from '@/services/api';
 
-interface IProduct {
-    detailDesc: string,
-    factory: string,
-    id: number,
-    image: string,
-    name: string,
-    price: number,
-    quantity: number,
-    shortDesc: string,
-    sold?: number,
-    target: null
-}
-
 const { Title, Text, Paragraph } = Typography;
 
 const FeatureProducts = () => {
@@ -23,7 +10,7 @@ const FeatureProducts = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const res = await getProductsAPI(1, 5)
+            const res = await getProductsAPI(1, 6)
             const products = res.data.products
             setProducts(products)
         }

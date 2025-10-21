@@ -61,11 +61,16 @@ export default function ProductDetailPage() {
                                 <span className="text-4xl font-bold text-gray-900">{new Intl.NumberFormat('en-US', {
                                     style: 'currency',
                                     currency: 'USD'
-                                }).format(product?.price! * 0.75)}</span>
-                                <span className="text-xl text-gray-500 line-through">${product?.price}</span>
-                                <span className="bg-red-100 text-red-600 px-2 py-1 rounded text-sm font-semibold">
-                                    25% OFF
-                                </span>
+                                }).format(product?.price!)}</span>
+                            </div>
+                            <div>
+                                <span className='text-2xl'> Category: </span>
+                                <span className='text-gray-600 text-xl'> {product?.target}</span>
+                            </div>
+
+                            <div className='my-3'>
+                                <span className='text-2xl'> Brand: </span>
+                                <span className='text-gray-600 text-xl'> {product?.factory}</span>
                             </div>
 
                             <p className="text-gray-600 leading-relaxed">{product?.detailDesc}</p>
@@ -93,7 +98,7 @@ export default function ProductDetailPage() {
 
                         {/* Action Buttons */}
                         <div className="flex gap-3">
-                            <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors">
+                            <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer">
                                 <ShoppingCart className="w-5 h-5" />
                                 Add to Cart
                             </button>

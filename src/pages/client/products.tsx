@@ -11,6 +11,9 @@ const { Title, Text, Paragraph } = Typography;
 
 const ProductsPage = () => {
     const [products, setProducts] = useState<IProduct[]>();
+    const [page, setPage] = useState<number>(1)
+    const [pageSize, setPageSize] = useState<number>(5)
+    const [total, setTotal] = useState<number>(0)
     const [loading, setLoading] = useState<any>({});
     const navigate = useNavigate()
     // filter states
@@ -22,14 +25,14 @@ const ProductsPage = () => {
     const factories = Array.from(new Set(products?.map(p => p.factory)));
     useEffect(() => {
         const fetchProducts = async () => {
-            const res = await getProductsAPI(1, 10)
-            console.log(res)
-            const products = res.data.products
-            setProducts(products)
+            const res = await getProductsAPI(page, pageSize)
+            setProducts(res.data.products)
+            setTotal(res.data.count)
+            console.log(res.data.totalPages)
         }
         fetchProducts()
 
-    }, [])
+    }, [page, pageSize])
 
 
     const handleFactoryChange = (checkedValues: any) => {
@@ -227,7 +230,9 @@ const ProductsPage = () => {
                             <Text type="secondary">Try adjusting your filters</Text>
                         </div>
                     )}
-                    <Pagination className="m-5!" align="center" defaultCurrent={1} total={50} />
+                    <Pagination className="m-5!" align="center" current={page} total={total} onChange={(pageNumber) => {
+                        setPage(pageNumber)
+                    }} />
                 </Col>
             </Row>
         </div>

@@ -28,10 +28,10 @@ const getUsersAPI = async (accessToken: string) => {
     return await axios.get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
 }
 
-const getProductsAPI = async (page: number, size: number) => {
+const getProductsAPI = async (page: number, pageSize: number, factory?: string, target?: string, price?: string, sort?: string) => {
     let url = base + "/api/products"
     return await axios.get(url, {
-        params: { page, size }
+        params: { page, pageSize, factory, target, price, sort }
     })
 }
 

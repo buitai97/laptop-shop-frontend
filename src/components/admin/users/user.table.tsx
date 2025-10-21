@@ -10,7 +10,7 @@ const UserTable = () => {
         const fetchUsers = async () => {
             const accessToken = localStorage.getItem("accessToken")
             const res = await getUsersAPI(accessToken!)
-            setData(res.data)
+            setData(res.data.users)
         }
         fetchUsers()
     }, [])
@@ -53,7 +53,7 @@ const UserTable = () => {
     return (
         <div style={{ margin: "10px" }}>
             <h3>Table User</h3>
-            <Table dataSource={data} columns={columns} rowKey="id" />;
+            <Table dataSource={data} columns={columns} rowKey="id" pagination={{ position: ["bottomCenter"] }} />;
         </div>
     )
 

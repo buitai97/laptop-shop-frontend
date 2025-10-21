@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { HomeOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, ProductOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import { Link, useNavigate } from 'react-router';
@@ -14,14 +14,19 @@ const AppHeader = () => {
 
     let items: MenuItem[] = [
         {
-            label: <Link to="/">Home</Link>,
+            label: <Link to="/admin">Home</Link>,
             key: 'home',
             icon: <HomeOutlined />,
         },
         {
-            label: <Link to="/users">Users</Link>,
+            label: <Link to="users">Users</Link>,
             key: 'users',
             icon: <UserOutlined />,
+        },
+        {
+            label: <Link to="products">Product</Link>,
+            key: 'products',
+            icon: <ProductOutlined />,
         },
         {
             label: 'Profile',
