@@ -4,44 +4,52 @@ import { SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { getProductsAPI } from '@/services/api';
 import { useNavigate } from 'react-router';
 
-
-
 const { Title, Text, Paragraph } = Typography;
-
-
 const ProductsPage = () => {
     const [products, setProducts] = useState<IProduct[]>();
     const [page, setPage] = useState<number>(1)
-    const [pageSize, setPageSize] = useState<number>(5)
+    const [pageSize, setPageSize] = useState<number>(8)
     const [total, setTotal] = useState<number>(0)
     const [loading, setLoading] = useState<any>({});
     const navigate = useNavigate()
+
     // filter states
     const [selectedFactories, setSelectedFactories] = useState<string[]>([]);
-    const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000]);
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 3000]);
     const [searchTerm, setSearchTerm] = useState('');
     const [inStockOnly, setInStockOnly] = useState(false);
 
-    const factories = Array.from(new Set(products?.map(p => p.factory)));
+    const factories = ["ASUS", "DELL", "LENOVO", "APPLE", "LG", "ACER"]
+
+    const categories = ['GAMING', "OFFICE", "GRAPHIC", "COMPACT"]
+
     useEffect(() => {
+
         const fetchProducts = async () => {
-            const res = await getProductsAPI(page, pageSize)
+            const res = await getProductsAPI(page, pageSize, inStockOnly, selectedFactories, selectedCategories, priceRange)
             setProducts(res.data.products)
             setTotal(res.data.count)
-            console.log(res.data.totalPages)
         }
         fetchProducts()
 
-    }, [page, pageSize])
+    }, [page, pageSize, inStockOnly, priceRange, selectedFactories, selectedCategories])
 
 
     const handleFactoryChange = (checkedValues: any) => {
-        setSelectedFactories(checkedValues);
+        setSelectedFactories([...checkedValues]);
+        setPage(1)
+    };
+
+    const handleCategoryChange = (checkedValues: any) => {
+        setSelectedCategories([...checkedValues]);
+        setPage(1)
     };
 
     const clearFilters = () => {
-        setSelectedFactories([]);
-        setPriceRange([0, 500]);
+        setSelectedFactories([])
+        setSelectedCategories([])
+        setPriceRange([0, 3000])
         setSearchTerm('');
         setInStockOnly(false);
     };
@@ -75,7 +83,7 @@ const ProductsPage = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
-            <Row gutter={[24, 24]} className="max-w-7xl mx-auto px-4">
+            <Row gutter={[24, 24]} className="mx-auto px-4">
                 {/* Filter Sidebar */}
                 <Col xs={0} md={6} lg={5}>
                     <Card
@@ -119,6 +127,22 @@ const ProductsPage = () => {
                             </Checkbox.Group>
                         </div>
 
+                        {/* Category Filter */}
+                        <div className="mb-6">
+                            <Text strong className="block mb-3">Category</Text>
+                            <Checkbox.Group
+                                value={selectedCategories}
+                                onChange={handleCategoryChange}
+                                className="flex flex-col gap-2"
+                            >
+                                {categories.map(category => (
+                                    <Checkbox key={category} value={category}>
+                                        {category}
+                                    </Checkbox>
+                                ))}
+                            </Checkbox.Group>
+                        </div>
+
                         <Divider />
 
                         {/* Price Range */}
@@ -129,7 +153,7 @@ const ProductsPage = () => {
                             <Slider
                                 range
                                 min={0}
-                                max={2000}
+                                max={3000}
                                 value={priceRange}
                                 onChange={(value) => setPriceRange(value as [number, number])}
                                 tooltip={{ formatter: (value) => `$${value}` }}
@@ -152,7 +176,7 @@ const ProductsPage = () => {
                 </Col>
 
                 {/* Products Grid */}
-                <Col xs={24} md={18} lg={19}>
+                <Col xs={24} md={18} lg={19} className='sm: px-10! md:px-5!'>
                     <Row gutter={[24, 24]}>
                         {products?.map((product: IProduct) => (
                             <Col
@@ -170,7 +194,7 @@ const ProductsPage = () => {
                                         hoverable
                                         cover={
                                             <div
-                                                className="h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group"
+                                                className="h-50 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group"
                                                 onClick={() => { navigate(`/products/${product.id}`) }}
                                             >
                                                 <img

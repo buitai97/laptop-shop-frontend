@@ -1,5 +1,5 @@
 import axios from "axios"
-
+import qs from "qs"
 
 const base = import.meta.env.VITE_API_BASE_URL;
 
@@ -28,10 +28,12 @@ const getUsersAPI = async (accessToken: string) => {
     return await axios.get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
 }
 
-const getProductsAPI = async (page: number, pageSize: number, factory?: string, target?: string, price?: string, sort?: string) => {
+const getProductsAPI = async (page: number, pageSize: number, inStockOnly: boolean, brands?: string[], targets?: string[], priceRange?: [number, number], sort?: string) => {
     let url = base + "/api/products"
+
     return await axios.get(url, {
-        params: { page, pageSize, factory, target, price, sort }
+        params: { page, pageSize, brands, targets, priceRange, inStockOnly, sort },
+        paramsSerializer: params => qs.stringify(params, { arrayFormat: "repeat" })
     })
 }
 
