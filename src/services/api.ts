@@ -29,8 +29,8 @@ const getUsersAPI = async (accessToken: string) => {
 }
 
 const getProductsAPI = async (page: number, pageSize: number, inStockOnly: boolean, brands?: string[], targets?: string[], priceRange?: [number, number], sort?: string) => {
+    console.log(import.meta.env.MODE);
     let url = base + "/api/products"
-
     return await axios.get(url, {
         params: { page, pageSize, brands, targets, priceRange, inStockOnly, sort },
         paramsSerializer: params => qs.stringify(params, { arrayFormat: "repeat" })
@@ -39,7 +39,7 @@ const getProductsAPI = async (page: number, pageSize: number, inStockOnly: boole
 
 const getProductAPI = async (id: number) => {
     let url = base + `/api/products/${id}`
-
+    console.log(import.meta.env.MODE);
     return await axios.get(url)
 }
 
