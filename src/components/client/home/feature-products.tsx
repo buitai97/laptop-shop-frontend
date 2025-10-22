@@ -10,7 +10,7 @@ const FeatureProducts = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const res = await getProductsAPI(1, 6)
+            const res = await getProductsAPI(1, 6, true)
             const products = res.data.products
             setProducts(products)
         }

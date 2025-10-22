@@ -15,7 +15,7 @@ const Home = () => {
     const [totalProducts, setTotalProducts] = useState<number>(0)
     useEffect(() => {
         const fetchData = async () => {
-            const res1 = await getProductsAPI(1, 1)
+            const res1 = await getProductsAPI(1, 1, true)
             setTotalProducts(res1.data.count)
             const accessToken = localStorage.getItem("accessToken")
             const res2 = await getUsersAPI(accessToken!)

@@ -40,7 +40,7 @@ const UserTable = () => {
         {
             title: 'Action',
             key: 'action',
-            render: (_, record) => (
+            render: (_) => (
                 <Space size="middle">
                     <EditOutlined style={{ color: "orange", cursor: "pointer" }} />
                     <DeleteOutlined style={{ color: "red", cursor: "pointer" }} />

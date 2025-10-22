@@ -6,15 +6,13 @@ import { useEffect, useState } from "react"
 const ProductTable = () => {
     const [data, setData] = useState<{ count: number, products: IProduct[], pageSize: number }>()
     const [currentPage, setCurrentPage] = useState<number>(1)
-    const [pageSize, setPageSize] = useState<number>(5)
     useEffect(() => {
         const fetchProducts = async () => {
-            const res = await getProductsAPI(currentPage, pageSize)
+            const res = await getProductsAPI(currentPage, 5, false)
             setData(res.data)
         }
         fetchProducts()
-    }, [currentPage, pageSize])
-    console.log(data)
+    }, [currentPage])
     const columns: TableProps<IProduct>['columns'] = [
         {
             title: 'ID',
@@ -40,7 +38,7 @@ const ProductTable = () => {
         {
             title: 'Action',
             key: 'action',
-            render: (_, record) => (
+            render: (_) => (
                 <Space size="middle">
                     <EditOutlined style={{ color: "orange", cursor: "pointer" }} />
                     <DeleteOutlined style={{ color: "red", cursor: "pointer" }} />
@@ -61,7 +59,6 @@ const ProductTable = () => {
                     position: ["bottomCenter"],
                     total: data?.count,
                     current: currentPage,
-                    pageSize: pageSize,
                     onChange: (pageNumber) => {
                         setCurrentPage(pageNumber)
                     }

@@ -8,7 +8,6 @@ const { Title, Text, Paragraph } = Typography;
 const ProductsPage = () => {
     const [products, setProducts] = useState<IProduct[]>();
     const [page, setPage] = useState<number>(1)
-    const [pageSize, setPageSize] = useState<number>(8)
     const [total, setTotal] = useState<number>(0)
     const [loading, setLoading] = useState<any>({});
     const navigate = useNavigate()
@@ -27,13 +26,13 @@ const ProductsPage = () => {
     useEffect(() => {
 
         const fetchProducts = async () => {
-            const res = await getProductsAPI(page, pageSize, inStockOnly, selectedFactories, selectedCategories, priceRange)
+            const res = await getProductsAPI(page, 8, inStockOnly, selectedFactories, selectedCategories, priceRange)
             setProducts(res.data.products)
             setTotal(res.data.count)
         }
         fetchProducts()
 
-    }, [page, pageSize, inStockOnly, priceRange, selectedFactories, selectedCategories])
+    }, [page, inStockOnly, priceRange, selectedFactories, selectedCategories])
 
 
     const handleFactoryChange = (checkedValues: any) => {
