@@ -50,7 +50,7 @@ const FeatureProducts = () => {
     if (!dataLoading) {
         return (
 
-            <div className="">
+            <div>
                 <div className="max-w-7xl mx-auto">
                     {/* Header Section */}
                     <div className="text-center mb-16">
@@ -94,7 +94,7 @@ const FeatureProducts = () => {
                                         actions={cardActions(product)}
                                         className="bg-white/95 backdrop-blur-sm border border-white/20 rounded-2xl shadow-xl 
                     hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out
-                    transform hover:scale-[1.02] overflow-hidden"
+                    transform hover:scale-[1.01] overflow-hidden"
                                     >
                                         <div className="p-2">
                                             {/* Category Tag */}
