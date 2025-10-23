@@ -52,6 +52,7 @@ const ClientHomePage = () => {
 
             </div>
             <div className="px-10 py-10">
+                
                 <FeatureProducts />
             </div>
         </div>
