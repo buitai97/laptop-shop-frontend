@@ -46,13 +46,12 @@ const ClientHeader = () => {
     ];
 
     return (
-        <Header className="flex !items-center !justify-between !bg-white shadow md:!py-10">
-
+        <Header className="flex !items-center !justify-between !bg-white shadow md:!py-10 ">
             <div className="text-xl md:text-3xl font-bold text-cyan-900 cursor-pointer" onClick={() => { navigate("/") }}>Tech Store</div>
-            <div className="md:text-lg flex gap-6">
-                <div>
-                    <Link to="/" className="text-gray-500!">Home</Link>
-                    <Link to="/products" className="p-5 text-gray-500!">Products</Link>
+            <div className="md:text-2xl flex gap-6 ">
+                <div className="">
+                    <Link to="/" className="!text-gray-500">Home</Link>
+                    <Link to="/products" className="p-5 !text-gray-500">Products</Link>
                 </div>
             </div>
 
@@ -69,7 +68,7 @@ const ClientHeader = () => {
                     </Space>
                 </Dropdown>
             ) :
-                <Link to="/login">Login</Link>
+                <Link className="text-xl !text-gray-500" to="/login">Login</Link>
             }
         </Header>
     )
