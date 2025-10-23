@@ -46,10 +46,10 @@ const ClientHeader = () => {
     ];
 
     return (
-        <Header className="flex !items-center !justify-between !bg-white shadow">
+        <Header className="flex !items-center !justify-between !bg-white shadow md:!py-10">
 
-            <div className="text-xl font-bold text-cyan-900 cursor-pointer" onClick={() => { navigate("/") }}>Tech Store</div>
-            <div className="">
+            <div className="text-xl md:text-3xl font-bold text-cyan-900 cursor-pointer" onClick={() => { navigate("/") }}>Tech Store</div>
+            <div className="md:text-lg flex gap-6">
                 <div>
                     <Link to="/" className="text-gray-500!">Home</Link>
                     <Link to="/products" className="p-5 text-gray-500!">Products</Link>
@@ -62,7 +62,7 @@ const ClientHeader = () => {
                 <Dropdown
                     menu={{ items }}
                     trigger={['click']}
-                    className="cursor-pointer"
+                    className="cursor-pointer text-2xl"
                 >
                     <Space>
                         <MenuOutlined />
