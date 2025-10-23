@@ -1,3 +1,4 @@
+### Tech Shop 
 🚀 Features
 
 Product Catalog – Browse products by category, price, or brand
@@ -11,3 +12,5 @@ User Accounts – Login, registration, and order tracking
 Admin Dashboard – Manage products, orders, and users
 
 Responsive Design – Fully optimized for mobile and desktop
+
+🚀 [Live Demo](https://techshop-alpha.vercel.app/)
