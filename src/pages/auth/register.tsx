@@ -18,16 +18,25 @@ const RegisterPage = () => {
     const { message } = App.useApp()
     const navigate = useNavigate()
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-        if (values.email && values.name && values.password && values.confirmPassword && values.username) {
-            const res = await registerAPI(values.name, values.username, values.email, values.password, values.confirmPassword )
-            if (res && res.data) {
-                message.success('Registered Successfully!');
-                navigate("/login")
+        try {
+            setIsSubmit(true)
+            if (values.email && values.name && values.password && values.confirmPassword && values.username) {
+                const res = await registerAPI(values.name, values.username, values.email, values.password, values.confirmPassword)
+                if (res?.data) {
+                    message.success('Registered Successfully!');
+                    navigate("/login")
+                }
+                else {
+                    message.error("Something Happened!");
+                    setIsSubmit(false)
+                }
             }
-            else {
-                message.error("Something Happened!");
-                setIsSubmit(false)
-            }
+        } catch (res: any) {
+            setIsSubmit(false)
+            const errors = res.response.data.errors
+            errors.forEach((err: string) => {
+                message.error(err);
+            })
         }
     };
 

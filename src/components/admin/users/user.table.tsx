@@ -1,21 +1,21 @@
-import { getUsersAPI } from "@/services/api"
+import { deleteUserAPI, getUsersAPI } from "@/services/api"
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
-import { Space, Table, type TableProps } from "antd"
+import { Popconfirm, Space, Table, type TableProps } from "antd"
 import { useEffect, useState } from "react"
 
 const UserTable = () => {
-    const [data, setData] = useState([])
+    const [users, setUsers] = useState<IUser[]>([])
+    const accessToken = localStorage.getItem("accessToken")
 
     useEffect(() => {
         const fetchUsers = async () => {
-            const accessToken = localStorage.getItem("accessToken")
             const res = await getUsersAPI(accessToken!)
-            setData(res.data.users)
+            setUsers(res.data.users)
         }
         fetchUsers()
     }, [])
 
-    const columns: TableProps['columns'] = [
+    const columns: TableProps<IUser>['columns'] = [
         {
             title: 'ID',
             dataIndex: 'id',
@@ -33,17 +33,30 @@ const UserTable = () => {
             key: 'username',
         },
         {
-            title: 'Phone',
-            dataIndex: 'phone',
-            key: 'phone',
+            title: 'Role',
+            dataIndex: 'role',
+            key: 'role',
+            render: (role) => <span>{role.name}</span>,
         },
         {
             title: 'Action',
             key: 'action',
-            render: (_) => (
+            render: (_, record) => (
                 <Space size="middle">
+
                     <EditOutlined style={{ color: "orange", cursor: "pointer" }} />
-                    <DeleteOutlined style={{ color: "red", cursor: "pointer" }} />
+                    <Popconfirm
+                        title="Delete the user"
+                        description="Are you sure to delete this user?"
+                        okText="Yes"
+                        cancelText="No"
+                        onConfirm={() => {
+                            deleteUserAPI(record.id, accessToken!)
+                            setUsers(users.filter(user => user.id !== record.id))
+                        }}
+                    >
+                        <DeleteOutlined style={{ color: "red", cursor: "pointer" }} />
+                    </Popconfirm>
                 </Space>
             ),
         },
@@ -53,7 +66,7 @@ const UserTable = () => {
     return (
         <div style={{ margin: "10px" }}>
             <h3>Table User</h3>
-            <Table dataSource={data} columns={columns} rowKey="id" pagination={{ position: ["bottomCenter"] }} />;
+            <Table dataSource={users} columns={columns} rowKey="id" pagination={{ position: ["bottomCenter"] }} />;
         </div>
     )
 

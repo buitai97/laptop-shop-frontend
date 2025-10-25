@@ -13,4 +13,16 @@ declare global {
         sold?: number,
         target: null
     }
+    interface IUser {
+        id: number,
+        username: string,
+        email: string,
+        avatar: string,
+        name: string,
+        role: {
+            id: number,
+            name: string,
+            description: string
+        }
+    }
 }

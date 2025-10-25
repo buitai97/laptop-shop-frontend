@@ -16,9 +16,8 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             const res1 = await getProductsAPI(1, 1, true)
+            const res2 = await getUsersAPI()
             setTotalProducts(res1.data.count)
-            const accessToken = localStorage.getItem("accessToken")
-            const res2 = await getUsersAPI(accessToken!)
             setTotalUsers(res2.data.count)
         }
         fetchData()

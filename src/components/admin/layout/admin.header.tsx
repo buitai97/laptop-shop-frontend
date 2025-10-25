@@ -40,7 +40,16 @@ const AppHeader = () => {
                     key: 'logout',
                     onClick: () => {
                         localStorage.removeItem("accessToken")
-                        setUser({ id: 0, name: "", username: "" })
+                        setUser({
+                            id: 0, name: "", username: "",
+                            email: '',
+                            avatar: '',
+                            role: {
+                                id: 0,
+                                name: '',
+                                description: ''
+                            }
+                        })
                         setIsAuthenticated(false)
                         navigate("/login")
                     }

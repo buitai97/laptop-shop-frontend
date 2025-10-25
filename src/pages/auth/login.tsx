@@ -1,7 +1,8 @@
 import type { FormProps } from 'antd';
 import { App, Button, Divider, Form, Input, Typography } from 'antd';
-import { loginAPI } from '../../services/api';
+import { fetchAccountAPI, loginAPI } from '../../services/api';
 import { Link, useNavigate } from 'react-router';
+import { useAppContext } from '@/context/app.provider';
 
 type FieldType = {
     username: string;
@@ -13,6 +14,7 @@ type FieldType = {
 const LoginPage = () => {
     const { notification } = App.useApp()
     const navigate = useNavigate()
+    const { setUser, setIsAuthenticated } = useAppContext();
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
         const { password, username } = values
 
@@ -21,8 +23,12 @@ const LoginPage = () => {
             if (res?.data) {
                 const accessToken = res.data.accessToken
                 localStorage.setItem("accessToken", accessToken)
-                
-                navigate("/")
+                const currentUser = await fetchAccountAPI()
+                console.log(res)
+                const user = currentUser?.data?.data?.user
+                setUser(user as IUser)
+                setIsAuthenticated(true)
+                navigate("/admin")
             }
         }
         catch (error: any) {

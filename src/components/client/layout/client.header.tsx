@@ -9,6 +9,7 @@ const { Header } = Layout;
 const ClientHeader = () => {
     const { user, setUser, setIsAuthenticated } = useAppContext()
     const navigate = useNavigate()
+    console.log(user)
     const handleLogout = async () => {
         setUser(null);
         setIsAuthenticated(false)

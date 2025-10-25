@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Layout from './components/admin/layout/admin.layout'
-import { createBrowserRouter } from "react-router";
+import AdminLayout from './components/admin/layout/admin.layout'
+import { createBrowserRouter, Outlet } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import User from '@pages/admin/user';
 import Home from '@/pages/admin/home';
@@ -17,6 +17,8 @@ import RegisterPage from './pages/auth/register';
 import ProductsPage from './pages/client/products';
 import ProductDetailPage from './pages/client/productDetail';
 import Product from './pages/admin/product';
+import ProtectedRoute from './components/auth/protectedRoute';
+
 
 const router = createBrowserRouter([
     {
@@ -36,23 +38,30 @@ const router = createBrowserRouter([
                 element: <ProductDetailPage />
             }
         ]
+
     },
     {
-        path: "/admin",
-        element: <Layout />,
+        element: <ProtectedRoute />,
         children: [
             {
-                index: true,
-                element: <Home />
-            },
-            {
-                path: "users",
-                element: <User />
-            },{
-                path:"products",
-                element: <Product />
-            }
-        ]
+                path: "/admin",
+                element: <AdminLayout />,
+                children: [
+                    {
+                        index: true,
+                        element: (
+                            <Home />
+                        )
+                    },
+                    {
+                        path: "users",
+                        element: <User />
+                    }, {
+                        path: "products",
+                        element: <Product />
+                    }
+                ]
+            }]
     },
     {
         path: "/login",
